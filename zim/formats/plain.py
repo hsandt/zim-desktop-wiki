@@ -106,20 +106,10 @@ class Dumper(DumperClass):
 		elif level > 5:
 			level = 5
 
-		if level in (1, 2):
-			# setext-style headers for lvl 1 & 2
-			if level == 1:
-				char = '='
-			else:
-				char = '-'
-			heading = ''.join(strings)
-			underline = char * len(heading.strip('\n'))
-			return [heading, underline + '\n']
-		else:
-			# atx-style headers for deeper levels
-			tag = '#' * level
-			strings.insert(0, tag + ' ')
-			return strings
+		# atx-style headers
+		tag = '#' * level
+		strings.insert(0, tag + ' ')
+		return strings
 
 	def dump_list(self, tag, attrib, strings):
 		if 'indent' in attrib:

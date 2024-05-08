@@ -1176,6 +1176,9 @@ class OpenPageDialog(Dialog):
 			notebook=parent.notebook
 		)
 
+		# Prevent creation of new page when jumping
+		self.form.widgets['page'].existing_only = True
+
 	def do_response_ok(self):
 		path = self.form['page']
 		if not path:

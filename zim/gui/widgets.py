@@ -1835,7 +1835,10 @@ class PageEntry(InputEntry):
 		model = completion.get_model()
 		model.clear()
 
-		if not text or not self.get_input_valid():
+		# Stop if there is no text at all, but continue if text input is just invalid
+		# (not self.get_input_valid()) as non-existing page names are now considered invalid
+		# to prevent new page creation during Jump, but we still want to auto-complete such names
+		if not text:
 			return
 
 		if ':' in text:
